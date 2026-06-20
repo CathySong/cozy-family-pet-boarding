@@ -44,10 +44,14 @@
     .pet-main-card{background:#fff;border-radius:24px;padding:20px;box-shadow:0 12px 36px rgba(59,39,20,.14);border:3px solid #fff;position:relative;z-index:1;max-width:300px;animation:floatCard 4s ease-in-out infinite}
     .pet-main-img{width:100%;height:240px;border-radius:18px;overflow:hidden;margin-bottom:14px;position:relative}
     .pet-main-img img{width:100%;height:100%;object-fit:cover;display:block}
-    .pet-carousel{position:relative;width:100%;height:240px;border-radius:18px;overflow:hidden;background:#f4e7d4}
-    .pet-carousel-track{position:relative;width:100%;height:100%}
-    .pet-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .8s ease-in-out;border-radius:18px}
-    .pet-slide.active{opacity:1}
+    .pet-carousel{position:relative;width:100%;height:300px;background:transparent;overflow:visible}
+    .pet-carousel-track{position:relative;width:100%;height:100%;overflow:hidden}
+    .pet-pair{position:absolute;inset:0;display:flex;gap:14px;opacity:0;transform:translateX(40px);transition:opacity .6s ease-out,transform .6s ease-out;pointer-events:none;will-change:transform,opacity}
+    .pet-pair.active{opacity:1;transform:translateX(0);pointer-events:auto;z-index:2}
+    .pet-pair.exit-left{transform:translateX(-40px);opacity:0;z-index:1}
+    .pet-frame{flex:1;height:300px;width:100%;object-fit:cover;display:block;box-shadow:0 14px 32px rgba(59,39,20,.18);transition:transform .5s ease}
+    .pet-frame:nth-child(1){clip-path:polygon(0 0,100% 0,92% 100%,0 95%);transform:translateY(-6px) rotate(-1.2deg);border-radius:18px 18px 0 18px}
+    .pet-frame:nth-child(2){clip-path:polygon(8% 0,100% 5%,100% 100%,0 100%);transform:translateY(6px) rotate(1deg);border-radius:0 18px 18px 18px}
     .pet-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.85);border:none;width:34px;height:34px;border-radius:50%;font-size:1rem;font-weight:800;color:var(--brown);cursor:pointer;box-shadow:0 4px 12px rgba(59,39,20,.2);transition:transform .2s,background .2s;z-index:3;line-height:1}
     .pet-arrow:hover{background:#fff;transform:translateY(-50%) scale(1.08)}
     .pet-prev{left:8px}
@@ -328,11 +332,22 @@
     <div class="pet-main-card">
       <div class="pet-carousel">
   <div class="pet-carousel-track">
-    <img class="pet-slide active" src="https://images.unsplash.com/photo-1568572933382-74d440642117?w=600&q=80" alt="Happy Golden Retriever" data-i="0"/>
-    <img class="pet-slide" src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80" alt="Cute Corgi" data-i="1"/>
-    <img class="pet-slide" src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=600&q=80" alt="Friendly Poodle" data-i="2"/>
-    <img class="pet-slide" src="https://images.unsplash.com/photo-1561948955-570b270e7c36?w=600&q=80" alt="Curious Shiba Inu" data-i="3"/>
-    <img class="pet-slide" src="https://images.unsplash.com/photo-1605568427561-40dd23c2acea?w=600&q=80" alt="Cute Bulldog" data-i="4"/>
+    <div class="pet-pair active" data-i="0">
+      <img class="pet-frame" src="https://images.unsplash.com/photo-1568572933382-74d440642117?w=600&q=80" alt="Happy Golden Retriever"/>
+      <img class="pet-frame" src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80" alt="Cute Corgi"/>
+    </div>
+    <div class="pet-pair" data-i="1">
+      <img class="pet-frame" src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=600&q=80" alt="Friendly Poodle"/>
+      <img class="pet-frame" src="https://images.unsplash.com/photo-1561948955-570b270e7c36?w=600&q=80" alt="Curious Shiba Inu"/>
+    </div>
+    <div class="pet-pair" data-i="2">
+      <img class="pet-frame" src="https://images.unsplash.com/photo-1605568427561-40dd23c2acea?w=600&q=80" alt="Cute Bulldog"/>
+      <img class="pet-frame" src="https://images.unsplash.com/photo-1518155317743-a8ff43ea6a5f?w=600&q=80" alt="Playful Husky"/>
+    </div>
+    <div class="pet-pair" data-i="3">
+      <img class="pet-frame" src="https://images.unsplash.com/photo-1612536057832-2ff7ead58194?w=600&q=80" alt="Sweet Dachshund"/>
+      <img class="pet-frame" src="https://images.unsplash.com/photo-1591768793355-74d04bb6608f?w=600&q=80" alt="Curious Beagle"/>
+    </div>
   </div>
   <button class="pet-arrow pet-prev" type="button" aria-label="Previous">&#10094;</button>
   <button class="pet-arrow pet-next" type="button" aria-label="Next">&#10095;</button>
@@ -341,7 +356,6 @@
     <span class="pet-dot" data-i="1"></span>
     <span class="pet-dot" data-i="2"></span>
     <span class="pet-dot" data-i="3"></span>
-    <span class="pet-dot" data-i="4"></span>
   </div>
 </div>
       <h3 class="pet-main-title">Meet your pet's second family</h3>
@@ -661,23 +675,35 @@
 </script>
 <script>
 (function(){
-  var slides=document.querySelectorAll('.pet-slide');
+  var pairs=document.querySelectorAll('.pet-pair');
   var dots=document.querySelectorAll('.pet-dot');
   var prev=document.querySelector('.pet-prev');
   var next=document.querySelector('.pet-next');
-  if(!slides.length) return;
-  var cur=0, total=slides.length;
-  function show(i){
-    slides[cur].classList.remove('active');
+  if(!pairs.length) return;
+  var cur=0, total=pairs.length;
+  function show(dir){
+    var next=(cur+(dir||1)+total)%total;
+    pairs[cur].classList.remove('active');
+    pairs[cur].classList.add(dir===1?'exit-left':'exit-right');
     dots[cur].classList.remove('active');
-    cur=(i+total)%total;
-    slides[cur].classList.add('active');
-    dots[cur].classList.add('active');
+    pairs[next].classList.remove('exit-left','exit-right');
+    pairs[next].classList.add('active');
+    dots[next].classList.add('active');
+    cur=next;
   }
-  setInterval(function(){show(cur+1);}, 3500);
-  if(prev) prev.addEventListener('click',function(){show(cur-1);});
-  if(next) next.addEventListener('click',function(){show(cur+1);});
-  dots.forEach(function(d){d.addEventListener('click',function(){show(parseInt(d.dataset.i,10)||0);});});
+  var timer=setInterval(function(){show(1);}, 3500);
+  if(prev) prev.addEventListener('click',function(){clearInterval(timer);show(-1);timer=setInterval(function(){show(1);},3500);});
+  if(next) next.addEventListener('click',function(){clearInterval(timer);show(1);timer=setInterval(function(){show(1);},3500);});
+  dots.forEach(function(d){
+    d.addEventListener('click',function(){
+      clearInterval(timer);
+      var target=parseInt(d.dataset.i,10)||0;
+      if(target===cur) return;
+      var dir=target>cur?1:-1;
+      show(dir);
+      timer=setInterval(function(){show(1);},3500);
+    });
+  });
 })();
 </script>
 </body>
