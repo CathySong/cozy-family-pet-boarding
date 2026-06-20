@@ -23,8 +23,9 @@
     .nav-cta{background:var(--coral)!important;color:#fff!important;padding:8px 18px;border-radius:50px;font-weight:800!important;transition:transform .2s,box-shadow .2s!important}
     .nav-cta:hover{transform:scale(1.05);box-shadow:0 6px 18px rgba(240,84,84,.4)}
     .hero{position:relative;overflow:hidden;padding:52px 6% 56px;background:linear-gradient(135deg,#FFF6EC 0%,#FFF0DC 50%,#FFDEC8 100%);background-size:200% 200%;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;animation:bgFlow 18s ease-in-out infinite}
+    .hero::before{content:'';position:absolute;width:520px;height:520px;right:-120px;top:80px;background:radial-gradient(circle,#FFB6A6 0%,transparent 65%);opacity:.45;pointer-events:none;animation:blobFloat 8s ease-in-out infinite}
     .hero::after{content:'';position:absolute;right:-80px;top:-80px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(240,84,84,.1),transparent 70%);pointer-events:none}
-    .paw{position:absolute;font-size:1.6rem;opacity:.25;pointer-events:none;z-index:0;animation:pawFloat 6s ease-in-out infinite}
+    .paw{position:absolute;font-size:1.6rem;opacity:.18;pointer-events:none;z-index:0;animation:pawFloat 6s ease-in-out infinite}
     .paw-1{top:18%;left:8%;animation-delay:0s}
     .paw-2{top:62%;left:4%;animation-delay:1.4s;font-size:1.2rem}
     .paw-3{top:30%;left:46%;animation-delay:2.8s;font-size:1.4rem}
@@ -35,6 +36,20 @@
     .spk-3{top:68%;left:14%;animation-delay:1.8s}
     .spk-4{top:12%;left:40%;animation-delay:2.6s}
     .spk-5{top:84%;left:24%;animation-delay:1.3s}
+    .heart{position:absolute;font-size:1.1rem;opacity:.55;pointer-events:none;z-index:0;animation:heartFloat 4.5s ease-in-out infinite}
+    .heart-1{top:25%;left:18%;animation-delay:0s}
+    .heart-2{top:55%;left:42%;animation-delay:1.5s;font-size:.95rem}
+    .heart-3{top:78%;left:10%;animation-delay:3s;font-size:1.2rem}
+    .heart-4{top:18%;left:52%;animation-delay:2.2s;font-size:.85rem}
+    .pet-main-card{background:#fff;border-radius:24px;padding:20px;box-shadow:0 12px 36px rgba(59,39,20,.14);border:3px solid #fff;position:relative;z-index:1;max-width:300px;animation:floatCard 4s ease-in-out infinite}
+    .pet-main-img{width:100%;height:240px;border-radius:18px;overflow:hidden;margin-bottom:14px;position:relative}
+    .pet-main-img img{width:100%;height:100%;object-fit:cover;display:block}
+    .pet-main-title{font-family:'Baloo 2',cursive;font-size:1.1rem;color:var(--brown);margin-bottom:8px;line-height:1.2}
+    .pet-main-tags{display:flex;flex-wrap:wrap;gap:5px}
+    .pet-main-tag{background:var(--soft);color:var(--caramel);border-radius:50px;padding:3px 10px;font-size:.7rem;font-weight:700}
+    .mini-card{background:#fff;border-radius:16px;padding:8px 14px;box-shadow:0 6px 18px rgba(59,39,20,.1);font-size:.85rem;font-weight:700;color:var(--brown);display:inline-flex;align-items:center;gap:6px;position:relative;z-index:1}
+    .mini-card.dog{animation:floatCard 4.5s ease-in-out infinite}
+    .mini-card.cat{animation:floatCard 5s 1s ease-in-out infinite}
     .hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(240,84,84,.1);border:1.5px solid rgba(240,84,84,.25);border-radius:50px;padding:4px 14px;font-size:.78rem;font-weight:800;color:var(--coral);margin-bottom:14px}
     .hero h1{font-family:'Baloo 2',cursive;font-size:clamp(1.85rem,4.5vw,3rem);line-height:1.1;color:var(--brown);margin-bottom:12px;animation:titlePop .8s cubic-bezier(.34,1.56,.64,1) both}
     .hero h1 b{color:var(--coral)}
@@ -64,6 +79,9 @@
     @keyframes twinkle{0%,100%{opacity:0;transform:scale(.6)}50%{opacity:.85;transform:scale(1.15)}}
     @keyframes titlePop{0%{opacity:0;transform:translateY(-18px) scale(.92)}100%{opacity:1;transform:translateY(0) scale(1)}}
     @keyframes petWiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-6deg)}75%{transform:rotate(6deg)}}
+    @keyframes floatCard{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-14px) rotate(1deg)}}
+    @keyframes heartFloat{0%,100%{transform:translateY(0) scale(1);opacity:.5}50%{transform:translateY(-12px) scale(1.15);opacity:.85}}
+    @keyframes blobFloat{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-30px,20px) scale(1.08)}}
     .trust-bar{background:var(--brown);display:grid;grid-template-columns:repeat(4,1fr);border-bottom:3px solid var(--caramel)}
     .trust-item{padding:16px 10px;text-align:center;border-right:1px solid rgba(255,255,255,.08)}
     .trust-item:last-child{border-right:none}
@@ -275,14 +293,18 @@
   <span class="sparkle spk-3">✨</span>
   <span class="sparkle spk-4">✨</span>
   <span class="sparkle spk-5">✨</span>
+  <span class="heart heart-1">❤️</span>
+  <span class="heart heart-2">❤️</span>
+  <span class="heart heart-3">❤️</span>
+  <span class="heart heart-4">❤️</span>
   <div>
-    <div class="hero-tag">&#128205; Longhill, NJ &middot; Near Kantor Park</div>
-    <h1>Your Pet's Home<br><b>Away From Home</b></h1>
-    <p class="hero-desc">Family-run pet boarding &middot; Cage-free &middot; Max 2 pets at a time<br>We work from home so your pet is never alone. Daily photo &amp; video updates &#128054;&#128049;</p>
+    <div class="hero-tag">&#128205; Long Hill, NJ &middot; Near Kantor Park</div>
+    <h1>Your Pet's <b>Cozy Vacation</b><br>While You're Away &#128062;</h1>
+    <p class="hero-desc">Family-run cage-free boarding in Long Hill, NJ. Daily photos, videos, cuddles, and a calm home environment.</p>
     <div class="hero-pills">
-      <span class="pill">&#127968; Real Home Environment</span>
-      <span class="pill">&#128247; Daily Photos &amp; Videos</span>
-      <span class="pill">&#128274; Secure Fenced Yard</span>
+      <span class="pill">&#127968; Real Home Boarding</span>
+      <span class="pill">&#128247; Daily Updates</span>
+      <span class="pill">&#128054; Dogs &amp; Cats Welcome</span>
       <span class="pill">&#128138; Medication Support</span>
     </div>
     <div class="hero-btns">
@@ -363,13 +385,13 @@
   <div class="wrap">
     <div class="chip gold rv">Transparent Pricing</div>
     <h2 class="sec-title rv">Rates</h2>
-    <p class="sec-sub rv">Priced by weight &middot; No hidden fees &middot; Stay 7+ nights and save 5%!</p>
+    <p class="sec-sub rv">Priced by weight &middot; No hidden fees &middot; First-time booking: free pickup &amp; drop-off!</p>
     <div class="price-grid rv">
       <div class="price-card"><div class="p-icon">&#128041;</div><div class="p-label">Small Dog / Cat</div><div class="p-weight">0 - 35 lbs</div><div class="p-price">$40</div><div class="p-unit">per night</div></div>
       <div class="price-card star"><div class="hot-tag">Most Popular</div><div class="p-icon">&#128054;</div><div class="p-label">Medium-Large Dog</div><div class="p-weight">35 - 60 lbs</div><div class="p-price"><span class="p-old">$60</span>$50</div><div class="p-unit">per night</div></div>
       <div class="price-card"><div class="p-icon">&#128054;</div><div class="p-label">Large Dog</div><div class="p-weight">60+ lbs</div><div class="p-price"><span class="p-old" style="color:var(--gray)">$80</span>$70</div><div class="p-unit">per night</div></div>
     </div>
-    <p class="pricing-note rv" style="text-align:center;font-size:0.85rem;color:var(--muted);margin:-0.5rem 0 1.5rem;font-style:italic;">* Only one discount or promotion may be applied per booking</p>
+    <p class="pricing-note rv" style="text-align:center;font-size:0.85rem;color:var(--muted);margin:-0.5rem 0 1.5rem;font-style:italic;">* Free pickup &amp; drop-off available for first-time bookings within 5 miles</p>
     <div class="addon-box rv">
       <h4>Add-On Services</h4>
       <table class="addon-tbl">
@@ -388,7 +410,7 @@
 </section>
 <div class="specials-bar">
   <div class="specials-title">Special Offer</div>
-  <div class="special-item rv"><div class="special-pct">5% OFF</div><h3>Book 7+ Nights &amp; Save</h3><p>Any single stay of 7 consecutive nights or more automatically receives 5% off. Perfect for longer trips - dogs and cats both qualify!</p></div>
+  <div class="special-item rv"><div class="special-pct">FREE</div><h3>First-Time Booking: Free Pickup &amp; Drop-Off</h3><p>New clients enjoy complimentary door-to-door transportation for their pet's first stay. We'll pick up and drop off your furry friend within 5 miles of Long Hill, NJ - no extra charge, no hassle!</p></div>
 </div>
 <section class="gallery-sec" id="gallery">
   <div class="wrap">
@@ -462,7 +484,7 @@
       <div class="faq-item rv"><button class="faq-q" onclick="toggleFaq(this)">My dog has separation anxiety - is that okay?<span class="arr">&#9662;</span></button><div class="faq-a">Yes! Please let us know in advance. Extra comfort and supervision is provided at a $10/night add-on fee.</div></div>
       <div class="faq-item rv"><button class="faq-q" onclick="toggleFaq(this)">Should I bring food and supplies?<span class="arr">&#9662;</span></button><div class="faq-a">We recommend bringing your pet's regular food. Special diets welcome (+$5/night). Bedding and toys are encouraged!</div></div>
       <div class="faq-item rv"><button class="faq-q" onclick="toggleFaq(this)">What are the drop-off and pick-up times?<span class="arr">&#9662;</span></button><div class="faq-a">Drop-off: 10 AM - 6 PM. Pick-up: by 8 PM. Walks before 7 AM or after 10 PM available for +$10/night.</div></div>
-      <div class="faq-item rv"><button class="faq-q" onclick="toggleFaq(this)">How do I get the 5% discount?<span class="arr">&#9662;</span></button><div class="faq-a">Book 7 consecutive nights or more and 5% is automatically applied - no code needed. Works for both dogs and cats!</div></div>
+      <div class="faq-item rv"><button class="faq-q" onclick="toggleFaq(this)">Do you offer free pickup and drop-off?<span class="arr">&#9662;</span></button><div class="faq-a">Yes! First-time clients get free pickup and drop-off within 5 miles of Long Hill, NJ. We'll bring your pet to our home and return them safely when your trip is done - no extra charge for the first booking.</div></div>
     </div>
   </div>
 </section>
