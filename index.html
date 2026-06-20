@@ -44,6 +44,18 @@
     .pet-main-card{background:#fff;border-radius:24px;padding:20px;box-shadow:0 12px 36px rgba(59,39,20,.14);border:3px solid #fff;position:relative;z-index:1;max-width:300px;animation:floatCard 4s ease-in-out infinite}
     .pet-main-img{width:100%;height:240px;border-radius:18px;overflow:hidden;margin-bottom:14px;position:relative}
     .pet-main-img img{width:100%;height:100%;object-fit:cover;display:block}
+    .pet-carousel{position:relative;width:100%;height:240px;border-radius:18px;overflow:hidden;background:#f4e7d4}
+    .pet-carousel-track{position:relative;width:100%;height:100%}
+    .pet-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .8s ease-in-out;border-radius:18px}
+    .pet-slide.active{opacity:1}
+    .pet-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.85);border:none;width:34px;height:34px;border-radius:50%;font-size:1rem;font-weight:800;color:var(--brown);cursor:pointer;box-shadow:0 4px 12px rgba(59,39,20,.2);transition:transform .2s,background .2s;z-index:3;line-height:1}
+    .pet-arrow:hover{background:#fff;transform:translateY(-50%) scale(1.08)}
+    .pet-prev{left:8px}
+    .pet-next{right:8px}
+    .pet-dots{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:7px;z-index:3}
+    .pet-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.55);cursor:pointer;transition:background .2s,transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+    .pet-dot:hover{background:rgba(255,255,255,.85)}
+    .pet-dot.active{background:#fff;transform:scale(1.25)}
     .pet-main-title{font-family:'Baloo 2',cursive;font-size:1.1rem;color:var(--brown);margin-bottom:8px;line-height:1.2}
     .pet-main-tags{display:flex;flex-wrap:wrap;gap:5px}
     .pet-main-tag{background:var(--soft);color:var(--caramel);border-radius:50px;padding:3px 10px;font-size:.7rem;font-weight:700}
@@ -314,7 +326,22 @@
   </div>
   <div class="hero-visual">
     <div class="pet-main-card">
-      <div class="pet-main-img"><img src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=600&q=80" alt="Happy dog in cozy home" style="width:100%;height:100%;object-fit:cover;border-radius:18px;display:block"/></div>
+      <div class="pet-carousel">
+  <div class="pet-carousel-track">
+    <img class="pet-slide active" src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=600&q=80" alt="Happy golden in cozy home" data-i="0"/>
+    <img class="pet-slide" src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80" alt="Cute corgi" data-i="1"/>
+    <img class="pet-slide" src="https://images.unsplash.com/photo-1561037404-61cd46aa615b?w=600&q=80" alt="Sweet cocker" data-i="2"/>
+    <img class="pet-slide" src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=600&q=80" alt="Curious shiba" data-i="3"/>
+  </div>
+  <button class="pet-arrow pet-prev" type="button" aria-label="Previous">&#10094;</button>
+  <button class="pet-arrow pet-next" type="button" aria-label="Next">&#10095;</button>
+  <div class="pet-dots">
+    <span class="pet-dot active" data-i="0"></span>
+    <span class="pet-dot" data-i="1"></span>
+    <span class="pet-dot" data-i="2"></span>
+    <span class="pet-dot" data-i="3"></span>
+  </div>
+</div>
       <h3 class="pet-main-title">Meet your pet's second family</h3>
       <div class="pet-main-tags">
         <span class="pet-main-tag">Cage-Free</span>
@@ -628,6 +655,27 @@
     if (e.key === 'ArrowRight') { idx = (idx + 1) % galItems.length; lbShow(); }
     if (e.key === 'Escape')     lbClose();
   });
+})();
+</script>
+<script>
+(function(){
+  var slides=document.querySelectorAll('.pet-slide');
+  var dots=document.querySelectorAll('.pet-dot');
+  var prev=document.querySelector('.pet-prev');
+  var next=document.querySelector('.pet-next');
+  if(!slides.length) return;
+  var cur=0, total=slides.length;
+  function show(i){
+    slides[cur].classList.remove('active');
+    dots[cur].classList.remove('active');
+    cur=(i+total)%total;
+    slides[cur].classList.add('active');
+    dots[cur].classList.add('active');
+  }
+  setInterval(function(){show(cur+1);}, 3500);
+  if(prev) prev.addEventListener('click',function(){show(cur-1);});
+  if(next) next.addEventListener('click',function(){show(cur+1);});
+  dots.forEach(function(d){d.addEventListener('click',function(){show(parseInt(d.dataset.i,10)||0);});});
 })();
 </script>
 </body>
