@@ -22,10 +22,21 @@
     .nav-r a:hover{color:var(--coral)}.nav-r a.active{color:var(--coral);border-bottom:2px solid var(--coral);padding-bottom:2px}
     .nav-cta{background:var(--coral)!important;color:#fff!important;padding:8px 18px;border-radius:50px;font-weight:800!important;transition:transform .2s,box-shadow .2s!important}
     .nav-cta:hover{transform:scale(1.05);box-shadow:0 6px 18px rgba(240,84,84,.4)}
-    .hero{position:relative;overflow:hidden;padding:52px 6% 56px;background:linear-gradient(135deg,#FFF6EC 0%,#FFF0DC 55%,#FFDEC8 100%);display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center}
+    .hero{position:relative;overflow:hidden;padding:52px 6% 56px;background:linear-gradient(135deg,#FFF6EC 0%,#FFF0DC 50%,#FFDEC8 100%);background-size:200% 200%;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;animation:bgFlow 18s ease-in-out infinite}
     .hero::after{content:'';position:absolute;right:-80px;top:-80px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(240,84,84,.1),transparent 70%);pointer-events:none}
+    .paw{position:absolute;font-size:1.6rem;opacity:.25;pointer-events:none;z-index:0;animation:pawFloat 6s ease-in-out infinite}
+    .paw-1{top:18%;left:8%;animation-delay:0s}
+    .paw-2{top:62%;left:4%;animation-delay:1.4s;font-size:1.2rem}
+    .paw-3{top:30%;left:46%;animation-delay:2.8s;font-size:1.4rem}
+    .paw-4{top:75%;left:38%;animation-delay:4.2s;font-size:1.1rem}
+    .sparkle{position:absolute;font-size:1.1rem;opacity:0;pointer-events:none;z-index:0;animation:twinkle 3.5s ease-in-out infinite}
+    .spk-1{top:22%;left:24%;animation-delay:0s}
+    .spk-2{top:48%;left:30%;animation-delay:.9s}
+    .spk-3{top:68%;left:14%;animation-delay:1.8s}
+    .spk-4{top:12%;left:40%;animation-delay:2.6s}
+    .spk-5{top:84%;left:24%;animation-delay:1.3s}
     .hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(240,84,84,.1);border:1.5px solid rgba(240,84,84,.25);border-radius:50px;padding:4px 14px;font-size:.78rem;font-weight:800;color:var(--coral);margin-bottom:14px}
-    .hero h1{font-family:'Baloo 2',cursive;font-size:clamp(1.85rem,4.5vw,3rem);line-height:1.1;color:var(--brown);margin-bottom:12px}
+    .hero h1{font-family:'Baloo 2',cursive;font-size:clamp(1.85rem,4.5vw,3rem);line-height:1.1;color:var(--brown);margin-bottom:12px;animation:titlePop .8s cubic-bezier(.34,1.56,.64,1) both}
     .hero h1 b{color:var(--coral)}
     .hero-desc{font-size:.92rem;color:var(--gray);margin-bottom:20px;max-width:440px;line-height:1.7}
     .hero-pills{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:22px}
@@ -42,9 +53,17 @@
     .hero-pet-card{background:#fff;border-radius:20px;padding:16px 20px;text-align:center;box-shadow:var(--shadow-lg);border:2px solid var(--border)}
     .hero-pet-card:first-child{animation:hf 4s ease-in-out infinite}
     .hero-pet-card:last-child{animation:hf 4s 2s ease-in-out infinite}
+    .hero-pet-card .pet-em{animation:petWiggle 3s ease-in-out infinite}
+    .hero-pet-card:first-child .pet-em{animation-delay:0s}
+    .hero-pet-card:last-child .pet-em{animation-delay:1.5s}
     .hero-pet-card .pet-em{font-size:2.8rem;line-height:1;display:block;margin-bottom:4px}
     .hero-pet-card .pet-name{font-family:'Baloo 2',cursive;font-size:.8rem;color:var(--brown)}
     @keyframes hf{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+    @keyframes bgFlow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+    @keyframes pawFloat{0%,100%{transform:translate(0,0) rotate(-12deg)}50%{transform:translate(6px,-14px) rotate(8deg)}}
+    @keyframes twinkle{0%,100%{opacity:0;transform:scale(.6)}50%{opacity:.85;transform:scale(1.15)}}
+    @keyframes titlePop{0%{opacity:0;transform:translateY(-18px) scale(.92)}100%{opacity:1;transform:translateY(0) scale(1)}}
+    @keyframes petWiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-6deg)}75%{transform:rotate(6deg)}}
     .trust-bar{background:var(--brown);display:grid;grid-template-columns:repeat(4,1fr);border-bottom:3px solid var(--caramel)}
     .trust-item{padding:16px 10px;text-align:center;border-right:1px solid rgba(255,255,255,.08)}
     .trust-item:last-child{border-right:none}
@@ -247,6 +266,15 @@
   </div>
 </nav>
 <section class="hero">
+  <span class="paw paw-1">🐾</span>
+  <span class="paw paw-2">🐾</span>
+  <span class="paw paw-3">🐾</span>
+  <span class="paw paw-4">🐾</span>
+  <span class="sparkle spk-1">✨</span>
+  <span class="sparkle spk-2">✨</span>
+  <span class="sparkle spk-3">✨</span>
+  <span class="sparkle spk-4">✨</span>
+  <span class="sparkle spk-5">✨</span>
   <div>
     <div class="hero-tag">&#128205; Longhill, NJ &middot; Near Kantor Park</div>
     <h1>Your Pet's Home<br><b>Away From Home</b></h1>
